@@ -4,15 +4,15 @@ import { computePricingSummary } from "../../domain/pricingService.js";
 export function registerGetPricingTool(mcp) {
   mcp.tool(
     "thais_get_pricing",
-    description="Obtenir le tarif total et la taxe de séjour pour un room_type et rate_id donnés sur une période donnée.",
     {
+      // Keep the schema explicit and strict so LLMs call the tool with valid args.
       checkIn: z.string().describe("YYYY-MM-DD ou DD/MM/YYYY"),
       checkOut: z.string().describe("YYYY-MM-DD ou DD/MM/YYYY"),
-      roomTypeId: z.number().int(),
-      rateId: z.number().int(),
-      adults: z.number().int().min(1),
-      children: z.number().int().min(0).optional(),
-      infants: z.number().int().min(0).optional(),
+      roomTypeId: z.coerce.number().int(),
+      rateId: z.coerce.number().int(),
+      adults: z.coerce.number().int().min(1),
+      children: z.coerce.number().int().min(0).optional(),
+      infants: z.coerce.number().int().min(0).optional(),
     },
     async (input) => {
       console.log("[MCP] thais_get_pricing", input);

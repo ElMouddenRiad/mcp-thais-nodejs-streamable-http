@@ -1,11 +1,9 @@
-// src/index.js
-import "dotenv/config";
-
 import { createMcpServer } from "./mcp/server.js";
 import { createApp } from "./app.js";
+import { env } from "./config/env.js";
 
-const PORT = Number(process.env.PORT ?? 3333);
-const HOST = process.env.HOST ?? "127.0.0.1";
+const PORT = env.port;
+const HOST = env.host;
 
 async function main() {
   // 1) MCP server + transport (stateless)

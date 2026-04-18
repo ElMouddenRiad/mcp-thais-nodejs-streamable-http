@@ -16,9 +16,9 @@ export function registerCheckAvailabilityTool(mcp) {
       checkIn: z.string().optional().describe("Date d'arrivée (YYYY-MM-DD ou DD/MM/YYYY). Ex: 2026-02-07"),
       checkOut: z.string().optional().describe("Date de départ (YYYY-MM-DD ou DD/MM/YYYY). Ex: 2026-02-12"),
 
-      adults: z.number().int().min(1).optional().describe("Nombre d'adultes (>=1)"),
-      children: z.number().int().min(0).optional().describe("Nombre d'enfants (>=0)"),
-      infants: z.number().int().min(0).optional().describe("Nombre de bébés (>=0)"),
+      adults: z.coerce.number().int().min(1).optional().describe("Nombre d'adultes (>=1)"),
+      children: z.coerce.number().int().min(0).optional().describe("Nombre d'enfants (>=0)"),
+      infants: z.coerce.number().int().min(0).optional().describe("Nombre de bébés (>=0)"),
     },
     async (input) => {
       console.log("[MCP] thais_check_availability", input);

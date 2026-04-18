@@ -10,6 +10,8 @@ export function createDebugRouter() {
       const checkIn = String(req.query.checkIn ?? "2021-03-15");
       const checkOut = String(req.query.checkOut ?? "2021-03-25");
       const adults = Number(req.query.adults ?? 2);
+      const children = Number(req.query.children ?? 0);
+      const infants = Number(req.query.infants ?? 0);
       const partySize = adults + children + infants;
 
       const roomTypes = await getRoomTypes();
@@ -17,8 +19,7 @@ export function createDebugRouter() {
         .filter((rt) => rt.public === true)
         .filter((rt) => rt.subject_to_pricing === true)
         .filter((rt) => rt.deleted === false)
-
-.filter((rt) => partySize >= rt.nb_persons_min && partySize <= rt.nb_persons_max)
+        .filter((rt) => partySize >= rt.nb_persons_min && partySize <= rt.nb_persons_max);
 
       const ids = new Set(compatible.map((x) => x.id));
       const avails = await getAvailabilitiesCurrents({ from: checkIn, to: checkOut });
@@ -40,7 +41,7 @@ export function createDebugRouter() {
         }))
         .filter((x) => x.minAvail > 0);
 
-      res.json({ ok: true, query: { checkIn, checkOut, adults }, available });
+      res.json({ ok: true, query: { checkIn, checkOut, adults, children, infants, partySize }, available });
     } catch (e) {
       res.status(500).send(String(e?.message ?? e));
     }
@@ -51,8 +52,10 @@ export function createDebugRouter() {
       const checkIn = String(req.query.checkIn ?? "2021-03-15");
       const checkOut = String(req.query.checkOut ?? "2021-03-25");
       const adults = Number(req.query.adults ?? 2);
+      const children = Number(req.query.children ?? 0);
+      const infants = Number(req.query.infants ?? 0);
 
-      const result = await computeAvailability({ checkIn, checkOut, adults });
+      const result = await computeAvailability({ checkIn, checkOut, adults, children, infants });
       res.json(result);
     } catch (e) {
       res.status(500).send(String(e?.message ?? e));

@@ -19,17 +19,17 @@ export function registerCreateEReservationTool(mcp) {
       customer_mobile: z.string().optional(),
       customer_country: z.string().optional().describe("Ex: FR"),
 
-      room_type_id: z.number().int(),
-      rate_id: z.number().int(),
-      price: z.number(),
+      room_type_id: z.coerce.number().int(),
+      rate_id: z.coerce.number().int(),
+      price: z.coerce.number(),
 
-      adults: z.number().int().min(1),
-      children: z.number().int().min(0).optional(),
-      infants: z.number().int().min(0).optional(),
+      adults: z.coerce.number().int().min(1),
+      children: z.coerce.number().int().min(0).optional(),
+      infants: z.coerce.number().int().min(0).optional(),
 
       comment: z.string().optional(),
       payment_type: z.string().optional().describe("Ex: CB"),
-      payment_amount: z.number().optional(),
+      payment_amount: z.coerce.number().optional(),
     },
     async (input) => {
     const dryRun = input.dryRun ?? true;

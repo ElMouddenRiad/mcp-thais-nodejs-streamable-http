@@ -5,6 +5,10 @@ export function createApp({ mcpTransport }) {
   const app = express();
   app.use(express.json({ limit: "2mb" }));
 
+  app.get("/health", (_req, res) => {
+    res.json({ ok: true, service: "mcp-thais-v1" });
+  });
+
   app.post("/mcp", async (req, res) => {
     try {
       await mcpTransport.handleRequest(req, res, req.body);

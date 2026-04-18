@@ -25,9 +25,9 @@ export function registerListRoomTypesTool(mcp) {
       }))
       .sort((a, b) => a.label.localeCompare(b.label));
 
-    const preview = list.slice(0, 20).map(
-  (rt) => `- [id=${rt.id}] ${rt.label} (capacité ${rt.minPersons}-${rt.maxPersons})`
-);
+    const preview = list
+      .slice(0, limit)
+      .map((rt) => `- [id=${rt.id}] ${rt.label} (capacité ${rt.minPersons}-${rt.maxPersons})`);
 
     const text =
       `Room types récupérés: ${list.length}.\n` +

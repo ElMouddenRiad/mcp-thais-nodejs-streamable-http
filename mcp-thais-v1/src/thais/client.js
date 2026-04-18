@@ -1,12 +1,8 @@
-import "dotenv/config";
+import { env } from "../config/env.js";
 
-const BASE_URL = process.env.THAIS_BASE_URL;
-const USERNAME = process.env.THAIS_USERNAME;
-const PASSWORD = process.env.THAIS_PASSWORD;
-
-if (!BASE_URL) throw new Error("Missing env THAIS_BASE_URL");
-if (!USERNAME) throw new Error("Missing env THAIS_USERNAME");
-if (!PASSWORD) throw new Error("Missing env THAIS_PASSWORD");
+const BASE_URL = env.thaisBaseUrl;
+const USERNAME = env.thaisUsername;
+const PASSWORD = env.thaisPassword;
 
 let cache = null; // { token, expiresAtMs }
 
