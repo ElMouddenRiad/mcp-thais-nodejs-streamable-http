@@ -1,5 +1,5 @@
 {
-  "name": "mcp-thais-v1",
+  "name": "mcp-thais-nodejs-streamable-http",
   "version": "1.0.0",
   "description": "Production-ready MCP server for Thais hotel availability, pricing, room details, and e-reservations.",
   "type": "module",

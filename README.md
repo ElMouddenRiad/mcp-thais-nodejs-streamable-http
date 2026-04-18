@@ -1,4 +1,4 @@
-# MCP Thais Hotel Toolkit
+# MCP Thais Node.js Streamable HTTP Toolkit
 
 A production-style local MCP server in Node.js that connects LLM agents (Claude Desktop, ChatGPT via bridge) to the ThaIs Hotel partner API.
 
